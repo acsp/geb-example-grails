@@ -4,4 +4,5 @@ addons:
 sudo: required
 jdk:
   - oraclejdk8
+  - openjdk11
 script: "./travis-build.sh"
