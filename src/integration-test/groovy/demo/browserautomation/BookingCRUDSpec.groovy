@@ -1,5 +1,6 @@
 package demo.browserautomation
 
+import demo.Application
 import demo.Booking
 import demo.BookingDataService
 import demo.BookingService
@@ -24,7 +25,7 @@ import spock.lang.Requires
 import spock.lang.Shared
 import java.time.LocalDate
 
-@Integration
+@Integration(applicationClass = Application)
 @Requires({ sys['geb.env'] })
 @Slf4j
 class BookingCRUDSpec extends GebReportingSpec implements LeakageDetector, Fixture, RoomFixture, ExtraFixture {

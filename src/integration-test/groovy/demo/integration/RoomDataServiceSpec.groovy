@@ -1,5 +1,6 @@
 package demo.integration
 
+import demo.Application
 import demo.LeakageDetector
 import demo.Room
 import demo.RoomDataService
@@ -10,7 +11,7 @@ import grails.gorm.transactions.Rollback
 import spock.lang.Specification
 import org.hibernate.SessionFactory
 
-@Integration
+@Integration(applicationClass = Application)
 @Rollback
 class RoomDataServiceSpec extends Specification implements LeakageDetector, RoomFixture {
 

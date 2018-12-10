@@ -1,5 +1,6 @@
 package demo.browserautomation
 
+import demo.Application
 import demo.Extra
 import demo.ExtraDataService
 import demo.ExtraFixture
@@ -14,7 +15,7 @@ import grails.testing.mixin.integration.Integration
 import groovy.util.logging.Slf4j
 import spock.lang.Requires
 
-@Integration
+@Integration(applicationClass = Application)
 @Requires({ sys['geb.env'] })
 @Slf4j
 class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFixture {

@@ -1,5 +1,6 @@
 package demo.integration
 
+import demo.Application
 import demo.Booking
 import demo.BookingDataService
 import demo.BookingFixture
@@ -12,7 +13,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 import org.hibernate.SessionFactory
 
-@Integration
+@Integration(applicationClass = Application)
 @Rollback
 class BookingDataServiceSpec extends Specification implements LeakageDetector, BookingFixture {
 

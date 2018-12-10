@@ -1,5 +1,6 @@
 package demo.integration
 
+import demo.Application
 import demo.Extra
 import demo.ExtraDataService
 import demo.LeakageDetector
@@ -9,7 +10,7 @@ import grails.gorm.transactions.Rollback
 import spock.lang.Specification
 import org.hibernate.SessionFactory
 
-@Integration
+@Integration(applicationClass = Application)
 @Rollback
 class ExtraDataServiceSpec extends Specification implements LeakageDetector {
 
