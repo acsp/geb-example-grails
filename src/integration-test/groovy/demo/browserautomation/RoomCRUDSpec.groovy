@@ -37,12 +37,22 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 		RoomListPage page = to RoomListPage
 
 		then:
+		waitFor {
+			at RoomListPage
+		}
+
+		and:
 		page.table.numberOfRows() == 0
 	}
 
 	def 'add a room'() {
-		given:
+		when:
 		RoomListPage page = to RoomListPage
+
+		then:
+		waitFor {
+			at RoomListPage
+		}
 
 		when:
 		page.buttons.create()
@@ -54,8 +64,13 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 	}
 
 	def 'enter the details'() {
-		given:
+		when:
 		CreateRoomPage page = to CreateRoomPage
+
+		then:
+		waitFor {
+			at CreateRoomPage
+		}
 
 		when:
 		page.name = 'Room 101'
@@ -74,9 +89,15 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 		given:
 		Room room = saveRoom('Room 101')
 
+		when:
 		ShowRoomPage page =  to ShowRoomPage, room.id
 
-		expect:
+		then:
+		waitFor {
+			at ShowRoomPage
+		}
+
+		and:
 		page.name == 'Room 101'
 
 		cleanup:
@@ -86,7 +107,14 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 	def 'edit the details'() {
 		given:
 		Room room = saveRoom('Room 101')
+
+		when:
 		ShowRoomPage page = to ShowRoomPage, room.id
+
+		then:
+		waitFor {
+			at ShowRoomPage
+		}
 
 		when:
 		page.buttons.edit()
@@ -116,6 +144,13 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 
 		when:
 		ShowRoomPage page = to ShowRoomPage, room.id
+
+		then:
+		waitFor {
+			at ShowRoomPage
+		}
+
+		when:
 		page.nav.rooms()
 		
 		then:
@@ -143,7 +178,13 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 		given:
 		Room room = saveRoom('Room 101')
 
+		when:
 		RoomListPage page = to RoomListPage
+
+		then:
+		waitFor {
+			at RoomListPage
+		}
 
 		when:
 		page.table.select('Room 101')
@@ -160,7 +201,14 @@ class RoomCRUDSpec extends GebReportingSpec implements LeakageDetector, RoomFixt
 	def 'delete room'() {
 		given:
 		Room room = saveRoom('Room 101')
+
+		when:
 		ShowRoomPage page = to ShowRoomPage, room.id
+
+		then:
+		waitFor {
+			at ShowRoomPage
+		}
 
 		when:
 		withConfirm { page.buttons.delete() }

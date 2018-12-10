@@ -79,8 +79,13 @@ class BookingCRUDSpec extends GebReportingSpec implements LeakageDetector, Fixtu
 	}
 
 	def 'add a booking'() {
-		given:
-		BookingListPage page = page BookingListPage
+		when:
+		BookingListPage page = to BookingListPage
+
+		then:
+		waitFor {
+			at BookingListPage
+		}
 
 		when:
 		page.buttons.create()

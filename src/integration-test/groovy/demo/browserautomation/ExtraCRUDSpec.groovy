@@ -41,8 +41,13 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	}
 
 	def 'add an extra'() {
-		given:
+		when:
 		ExtraListPage page = to ExtraListPage
+
+		then:
+		waitFor {
+			at ExtraListPage
+		}
 
 		when:
 		page.buttons.create()
@@ -54,8 +59,13 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	}
 
 	def 'enter the extra details'() {
-		given:
+		when:
 		CreateExtraPage page = to CreateExtraPage
+
+		then:
+		waitFor {
+			at CreateExtraPage
+		}
 
 		when:
 		page.name = 'Breakfast'
@@ -72,9 +82,16 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	def 'check the entered details for the extra'() {
 		given:
 		Extra extra = saveExtra('Breakfast')
+
+		when:
 		ShowExtraPage page = to ShowExtraPage, extra.id
 
-		expect:
+		then:
+		waitFor {
+			at ShowExtraPage
+		}
+
+		and:
 		page.name == 'Breakfast'
 
 		cleanup:
@@ -84,7 +101,14 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	def 'edit the details'() {
 		given:
 		Extra extra = saveExtra('Breakfast')
+
+		when:
 		ShowExtraPage page = to ShowExtraPage, extra.id
+
+		then:
+		waitFor {
+			at ShowExtraPage
+		}
 
 		when:
 		page.buttons.edit()
@@ -117,13 +141,19 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 
 		when:
 		ShowExtraPage page = to ShowExtraPage, extra.id
+
+		then:
+		waitFor {
+			at ShowExtraPage
+		}
+
+		when:
 		page.nav.extras()
 
 		then:
 		waitFor {
 			at ExtraListPage
 		}
-
 
 		when:
 		ExtraListPage listPage = browser.page ExtraListPage
@@ -144,7 +174,14 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	def 'show extra'() {
 		given:
 		Extra extra = saveExtra('Breakfast')
+
+		when:
 		ExtraListPage page = to ExtraListPage
+
+		then:
+		waitFor {
+			at ExtraListPage
+		}
 
 		when:
 		page.table.select('Breakfast')
@@ -161,7 +198,14 @@ class ExtraCRUDSpec extends GebReportingSpec implements LeakageDetector, ExtraFi
 	def 'delete extra'() {
 		given:
 		Extra extra = saveExtra('Breakfast')
+
+		when:
 		ShowExtraPage page = to ShowExtraPage, extra.id
+
+		then:
+		waitFor {
+			at ShowExtraPage
+		}
 
 		when:
 		withConfirm { page.buttons.delete() }
